@@ -1,0 +1,80 @@
+<h1>TWITTER</h1>
+<div id="menu">
+  <!-- <button (click)="clean()">Clean</button> -->
+
+  <button id="btn-logout" (click)="logout()">Logout</button>
+</div>
+
+
+
+<div id="post-form">
+
+  <input id="inp-post" type="text" placeholder="Tweet" required>
+
+  <button id="btn-post" class="btn btn-primary" (click)="post()">Post</button>
+
+
+
+</div>
+
+
+<div id="a-post">
+  <div id="b-post">
+    <h2>Tweets</h2>
+
+
+    <ul class="thumbnail" id="twits-post" *ngFor='let tweet of listOfTweets'>
+
+      <p><span> User: {{tweet.user}}</span></p>
+      <li>{{tweet.tweet}}</li>
+
+      <!-- MODAL FOR THE TWEETS -->
+      <bs-modal #modal1 class="modal fade">
+        <bs-modal-body>
+          <input id="{{tweet.idTweet}}" value={{tweet.tweet}}>
+        </bs-modal-body>
+        <bs-modal-footer>
+          <button class="btn btn-success" (click)="guardar(tweet.idTweet)" (click)="modal1.close()">Guardar</button>
+          <button class="btn btn-danger" (click)="modal1.close()">Salir</button>
+        </bs-modal-footer>
+      </bs-modal>
+
+
+      <button *ngIf="userLogged==tweet.user" type="button" class="btn btn-primary" (click)="modal1.open()">Editar</button>
+      <button *ngIf="userLogged==tweet.user" class="btn btn-default" (click)="delate(tweet.idTweet)">Eliminar</button><br>
+
+      <input id="comentario{{tweet.idTweet}}" placeholder="Cometar" type="text">
+
+      <button (click)="comentar(tweet.idTweet)">Comentar</button>
+
+
+      <!--  ************START FOR COMMENTS **************-->
+      <ul *ngFor="let comments of tweet.listOfComments">
+        <p><span>User: {{comments.user}}</span> </p>
+        <p>{{comments.Comment}}</p>
+        <a *ngIf="userLogged==comments.user" (click)="modal2.open()">Editar </a>
+        <a *ngIf="userLogged==comments.user" (click)="delateCommentry(comments.idCommentary)">Eliminar</a>
+
+        <!-- MODAL FOR THE COMMENTS -->
+
+        <bs-modal #modal2 class="modal fade">
+          <bs-modal-body>
+            <input id="{{comments.idCommentary}}" value={{comments.Comment}}>
+          </bs-modal-body>
+          <bs-modal-footer>
+            <button class="btn btn-success" (click)="guardarComentario(comments.idCommentary)" (click)="modal2.close()">Guardar</button>
+            <button class="btn btn-danger" (click)="modal2.close()">Salir</button>
+
+          </bs-modal-footer>
+        </bs-modal>
+
+      </ul>
+
+    </ul>
+    <!--  ************END FOR COMMENTS **************-->
+
+
+
+
+  </div>
+</div>

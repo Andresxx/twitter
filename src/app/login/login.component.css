@@ -1,0 +1,21 @@
+h1{
+    text-align: center;
+    color: rgb(0, 132, 255);
+    font-weight:bolder;
+   margin: 0;
+}
+
+div{
+    text-align: center;
+}
+span{
+    font-weight:bolder;    
+}
+
+button{
+    color: white;
+    background: rgb(0, 132, 255);
+    border-radius: 5px;
+    border-color: rgb(0, 132, 255);
+    margin-top: 1em;
+}
